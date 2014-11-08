@@ -33,23 +33,22 @@ public class AirportServer {
 		return (rad * 180.0 / Math.PI);
 	}
 	
-	public String[] getFiveAirports(String city, String state, PlaceList list, AirportList list2) {
+	public ArrayList<String> getFiveAirports(String city, String state, Place p, AirportList list2) {
+		ArrayList<Double> distances = new ArrayList<Double>()
+		HashMap<Double, Airport> airports = new HashMap<Double, Airport>();
+		double dist = 0;
 		String[] result = new String[4];
 		int temp = 0;
-		for (Place p : list.getPlaceList()) {
-			if(p.getState().compareToIgnoreCase(state) == 0) {
-				for(Airport a : list2.getAirportList()) {
-					double shortest = distance(p.getLat(),p.getLon(), a.getLat(),a.getLon());
-					for (int i = 0; i >= result.length; i++) {
-						if(shortest > temp) {
-							shortest = temp; 
-						}
-						
-					}
-					
-				}
-			}
+		for(Airport a : list2.getAirportList()) {
+			dist = Math.abs(distance(p.getLat(),p.getLon(), a.getLat(),a.getLon()));
+			distances.add(dist);
+			airports.put(dist, a);
 		}
-		return null;
+		Collections.sort(distances);
+		ArrayList<String> fiveguys = new ArrayList<String>();
+		for(i = 0; i < 5; i++){
+			fiveguys.add(airports.get(distances.get(i)));
+		}
+		return fiveguys;
 	}
 }
