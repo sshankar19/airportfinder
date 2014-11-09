@@ -33,12 +33,21 @@ public class AirportServer {
 		return (rad * 180.0 / Math.PI);
 	}
 	
+	airportList
+
+	ArrayList<Double> distances = new ArrayLiset<Double>();
+	Hash<Double, Airport> airports = new ArrayList<Double>();
+	double dist = 0;
+	String[] result = new String[4];
+
+
 	public ArrayList<String> getFiveAirports(String city, String state, Place p, AirportList list2) {
 		ArrayList<Double> distances = new ArrayList<Double>()
 		HashMap<Double, Airport> airports = new HashMap<Double, Airport>();
 		double dist = 0;
 		String[] result = new String[4];
 		int temp = 0;
+
 		for(Airport a : list2.getAirportList()) {
 			dist = Math.abs(distance(p.getLat(),p.getLon(), a.getLat(),a.getLon()));
 			distances.add(dist);
